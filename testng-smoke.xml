@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Smoke Test Suite" verbose="1">
+    <test name="Job Compass Smoke Tests">
+        <classes>
+            <class name="com.learnings.selenium.tests.smoke.AuthSetup"/>
+            <class name="com.learnings.selenium.tests.smoke.DashboardPageTest"/>
+            <class name="com.learnings.selenium.tests.smoke.AddApplicationTest"/>
+            <class name="com.learnings.selenium.tests.smoke.JobCompassLoginLogoutTest"/>
+        </classes>
+    </test>
+</suite>

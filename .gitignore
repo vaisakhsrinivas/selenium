@@ -1,0 +1,25 @@
+target/
+test-output/
+.auth/
+!.mvn/wrapper/maven-wrapper.jar
+.kotlin
+.idea/
+*.iml
+.DS_Store
+.vscode/
+
+# Local secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Logs
+*.log
+logs/
+
+# test data files
+src/test/resources/data/*
