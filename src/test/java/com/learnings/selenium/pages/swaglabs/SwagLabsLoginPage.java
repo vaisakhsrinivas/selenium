@@ -30,6 +30,7 @@ public class SwagLabsLoginPage {
         waitUtils.fill(password, passwordValue);
         waitUtils.click(loginButton);
         waitUtils.waitForPageLoad();
+        waitUtils.pressEscape();
     }
 
     public void verifyLoginSuccess() {

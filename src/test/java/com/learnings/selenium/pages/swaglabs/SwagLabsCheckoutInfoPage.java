@@ -25,9 +25,14 @@ public class SwagLabsCheckoutInfoPage {
         waitUtils.fill(postalCodeInput, postalCode);
     }
 
-    public void continueToOverview() {
-        waitUtils.click(continueButton);
+    public void clickContinue() {
+        waitUtils.jsClick(continueButton);
         waitUtils.waitForPageLoad();
+    }
+
+    public void continueToOverview() {
+        clickContinue();
+        waitUtils.waitForUrlContains("checkout-step-two");
     }
 
     public void verifyErrorMessage() {

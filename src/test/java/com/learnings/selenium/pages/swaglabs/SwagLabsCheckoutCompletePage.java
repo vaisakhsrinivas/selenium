@@ -20,8 +20,9 @@ public class SwagLabsCheckoutCompletePage {
     }
 
     public void verifyCheckoutComplete() {
+        waitUtils.waitForUrlContains("checkout-step-two");
         Assert.assertEquals(waitUtils.getText(checkoutOverview), "Checkout: Overview");
-        waitUtils.click(checkoutFinish);
+        waitUtils.jsClick(checkoutFinish);
         waitUtils.waitForUrlContains("checkout-complete");
         Assert.assertEquals(waitUtils.getText(checkoutOverview), "Checkout: Complete!");
         Assert.assertEquals(waitUtils.getText(completeOrder), "Thank you for your order!");

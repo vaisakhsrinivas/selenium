@@ -45,8 +45,18 @@ public class WaitUtils {
         waitForClickable(locator).click();
     }
 
+    public void jsClick(By locator) {
+        WebElement element = waitForVisible(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+    public void pressEscape() {
+        new Actions(driver).sendKeys(org.openqa.selenium.Keys.ESCAPE).perform();
+    }
+
     public void fill(By locator, String text) {
         WebElement element = waitForVisible(locator);
+        element.click();
         element.clear();
         element.sendKeys(text);
     }

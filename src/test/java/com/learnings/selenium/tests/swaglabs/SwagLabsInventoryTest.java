@@ -68,7 +68,7 @@ public class SwagLabsInventoryTest extends BaseTest {
         cartPage.proceedToCheckout();
 
         SwagLabsCheckoutInfoPage checkoutPage = new SwagLabsCheckoutInfoPage(driver);
-        checkoutPage.continueToOverview();
+        checkoutPage.clickContinue();
         checkoutPage.verifyErrorMessage();
     }
 }
