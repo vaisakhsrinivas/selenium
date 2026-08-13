@@ -5,6 +5,7 @@ import com.learnings.selenium.pages.adhoc.HerokuLoginPage;
 import com.learnings.selenium.pages.heroku.HerokuStatusPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class HerokuErrorVerificationTest extends BaseTest {
@@ -13,7 +14,6 @@ public class HerokuErrorVerificationTest extends BaseTest {
     private static final String VALID_PASSWORD = "SuperSecretPassword!";
     private static final String INVALID_USERNAME = "testuser";
     private static final String INVALID_PASSWORD = "testuser!";
-    private String message;
 
     // --- Status code tests (use HerokuStatusPage) ---
 
@@ -26,7 +26,24 @@ public class HerokuErrorVerificationTest extends BaseTest {
         loginPage = new HerokuLoginPage(driver);
     }
 
-    @Test
+    @DataProvider(name = "statusCodes")
+    public Object[][] statusCodes(){
+        return new Object[][]{
+                {404,"This page returned a 404 status code"},
+                {500, "This page returned a 500 status code"},
+                {301, "This page returned a 301 status code"},
+                {200, "This page returned a 200 status code"},
+                {403, "This page returned a 403 status code"}
+        };
+    }
+
+    @Test(dataProvider = "statusCodes")
+    public void verifyStatusCode(int code, String message){
+        statusPage.gotoStatusCodePage(code);
+        statusPage.verifyStatusMessageContains(message);
+    }
+
+    /*@Test
     public void verify404Error() {
         // TODO: 1. Navigate to status code 404
         statusPage.gotoStatusCodePage(404);
@@ -69,7 +86,7 @@ public class HerokuErrorVerificationTest extends BaseTest {
         // TODO: 2. Verify message contains "403 Forbidden"
         String status = "This page returned a 403 status code";
         statusPage.verifyStatusMessageContains(status);
-    }
+    }*/
 
     // --- Login message tests (use HerokuLoginPage) ---
 
@@ -80,7 +97,7 @@ public class HerokuErrorVerificationTest extends BaseTest {
         // TODO: 2. login(VALID_USERNAME, VALID_PASSWORD)
         loginPage.login(VALID_USERNAME, VALID_PASSWORD);
         // TODO: 3. Get flash message, print it, assert it contains "You logged into a secure area!"
-        message = loginPage.getFlashMessage();
+        String message = loginPage.getFlashMessage();
         System.out.println("Login Message: " + message);
         Assert.assertTrue(message.contains("You logged into a secure area!"));
     }
@@ -92,8 +109,8 @@ public class HerokuErrorVerificationTest extends BaseTest {
         // TODO: 2. login("invalidUser", "invalidPassword")
         loginPage.login(INVALID_USERNAME, INVALID_PASSWORD);
         // TODO: 3. Get flash message, print it, assert it contains "Your username is invalid!"
-        message = loginPage.getFlashMessage();
-        System.out.println("Logout Message: " + message);
+        String message = loginPage.getFlashMessage();
+        System.out.println("Error Message: " + message);
         Assert.assertTrue(message.contains("Your username is invalid!"));
 
     }
